@@ -159,7 +159,11 @@ class Main extends Sprite {
 		text.text  = tongue.locale + "\n";
 		text.text += tongue.get("$INSTRUCTIONS",context) + "\n\n";
 		text.text += tongue.get("$HELLO_WORLD",context) + "\n";
-		text.text += tongue.get("$TEST_STRING",context) + "\n";
+		text.text += tongue.get("$TEST_STRING", context) + "\n";
+		var s = tongue.get("$VARS", context);
+		trace("TESTING");
+		s = Replace.flags(s, ["<X>", "<Y>","<Z>"], ["8", "0","3"]);
+		text.text += s;
 		
 		if (tongue.missingFiles != null)
 		{
