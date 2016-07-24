@@ -162,7 +162,7 @@ class Main extends Sprite {
 		text.text += tongue.get("$TEST_STRING", context) + "\n";
 		var s = tongue.get("$VARS", context);
 		trace("TESTING");
-		s = Replace.flags(s, ["<X>", "<Y>","<Z>"], ["8", "0","3"]);
+		s = Replace.flags(s, ["<X>", "<Y>","<Z>"], ["4", "8","3"]);
 		text.text += s;
 		
 		if (tongue.missingFiles != null)

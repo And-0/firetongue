@@ -65,11 +65,15 @@ class Replace
 			var reg:EReg = new EReg(temp+"\\s?\\{([^\\}]*)\\}", "g");//matches the corresponding curly braces
 			while (string.indexOf(flag) != -1)//While there is still a placeholder
 			{
+				var next:Int = string.indexOf(flag)+flagSize+1;
+				trace("next char: " + string.charAt(next));
 				//If curly braces follow...
-				if (reg.match(string)){//Just check the next position for {
+				if (string.charAt(next) == "{"){
 					//...grab the contents
-					var m:String = reg.matched(0).substring(reg.matched(0).lastIndexOf("{"));//grabs the braces
-					var sub = reg.matched(1);//The contents of the braces
+					var m:String = string.substring(next, string.indexOf("}") + 1);//the part to be replaced (the brackets)
+					trace("BRACKET: " + m);
+					var sub = m.substring(1, m.length - 1);//The contents of the braces
+					trace("CONTENTS: " + sub);
 					var arr = ~/\s?,\s?/g.split(sub);//Split the string into an array, using regex to account for spaces
 					var s:String = "";
 					//Are numbers provided?
