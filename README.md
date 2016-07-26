@@ -6,7 +6,7 @@ It implements a different way of handling plurals to make life easier for progra
 
 Defining plurals
 --
-*(For the full documentation, please refer to the [original repository](https://github.com/larsiusprime/firetongue).*
+*(For the full documentation, please refer to the [original repository](https://github.com/larsiusprime/firetongue).)*
 	
 To the translator, a string containing a variable will look something like this:
 	
@@ -14,11 +14,11 @@ To the translator, a string containing a variable will look something like this:
 	$STR	Give me <X> fish!
 ```
 
-If a different plural Form of the noun is needed, several strings have to be defined:
+If a different plural Form of the noun is needed, you'd have to define multiple strings:
 	
 ```tsv
 	$STR	Give me <X> beer!
-	$STR_PL	Give me <Y> beers!
+	$STR_PL	Give me <X> beers!
 ```	
 	
 This creates more work for programmers, who have to write code that takes the number of items into account, and for the translator, who have to take care of two strings that are almost the same.
@@ -29,7 +29,7 @@ However, now you can simply do this:
 	$STR	Give me <X> {beer, beers}!
 ```
 
-If you add curly brackets with the singular and plural form of the noun, the `flag` function in `Replace.hx` will automatically pick the right form depending on the number.
+If you add curly brackets with the singular and plural form of the noun, the `flag` function in `Replace.hx` will automatically pick the right form depending on whether the noun needs to be in singular or plural.
 
 ##Advanced usage##
 
@@ -39,7 +39,7 @@ But what if you are working in a target language with a more complex numeral sys
 	$STR	<X> {1:cù, 2:chù , 3:coin }
 ```
 
-If the variable value is higher than the values given in the string, the highest value is used (so if <X> equals 4, *coin* would be used).
+If the variable value is higher than the values given in the string, the highest value is used (so if <X> equals 4, *coin* is used).
 
 For even more complex cases, like in Polish, ranges of numbers can be specified:
 
