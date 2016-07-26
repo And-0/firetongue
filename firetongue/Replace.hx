@@ -70,51 +70,48 @@ class Replace
 				//If curly braces follow...
 				if (string.charAt(next) == "{"){
 					//...grab the contents
-					var m:String = string.substring(next, string.indexOf("}") + 1);//the part to be replaced (the brackets)
-					trace("BRACKET: " + m);
-					var sub = m.substring(1, m.length - 1);//The contents of the braces
-					trace("CONTENTS: " + sub);
-					var arr = ~/\s?,\s?/g.split(sub);//Split the string into an array, using regex to account for spaces
-					var s:String = "";
+					var bracket:String = string.substring(next, string.indexOf("}") + 1);//the part to be replaced (the brackets)
+					var content = bracket.substring(1, bracket.length - 1);//The contents of the braces
+					var arr = ~/\s?,\s?/g.split(content);//Split the string into an array, using regex to account for spaces
+					var plural:String = "";
 					//Are numbers provided?
 					if (~/[0-9]+/.match(arr[0])){
 						for (v in arr){
 							var n:String = v.substring(0, v.indexOf(":"));//The numeric expression (ex. 1 or 2-5)
-							trace("N  " + n);
 							//Is range?
 							if (n.indexOf("-") != -1){
 								var b:Int = Std.parseInt(n.substring(0, n.indexOf("-")));
 								var e:Int = 1+Std.parseInt(n.substring(n.indexOf("-")+1));
 								for (i in b...e){
 									if (Std.string(i) == value){
-										s = v.substring(v.indexOf(":") + 1);
+										plural = v.substring(v.indexOf(":") + 1);
 									}
 								}
 							} else{//If not a range
 								if (n == Std.string(value)){
-									s = v.substring(2);
+									plural = v.substring(2);
 								}
 							}
-							//If no match was found, use the smallest/largest value
-							if (s == ""){
+							//If no match was found, use the smallest/largest value //TODO: Closest value!
+							if (plural == ""){
 								if (Std.parseInt(value) < Std.parseInt(arr[0])){
 									var r:String = arr[0];
-									s = r.substring(r.indexOf(":")+1);
+									plural = r.substring(r.indexOf(":")+1);
 								} else{
 									var r:String = arr[arr.length - 1];
-									s = r.substring(r.indexOf(":")+1);
+									plural = r.substring(r.indexOf(":")+1);
 								}
 								
 							}
 						}
 					} else{//If no numbers are provided, assume binary singular/plural
 						if (arr.length < 2){
-							s = "NOT_ENOUGH_NUMBER_FORMS";
+							plural = "NOT_ENOUGH_NUMBER_FORMS";
 						} else{
-							s = (value == "1") ? arr[0] : arr[1];
+							plural = (value == "1") ? arr[0] : arr[1];
 						}
 					}
-					string = StringTools.replace(string, m, s);
+					string = StringTools.replace(string, bracket, plural);
 				}//Always replace the variable
 				string = StringTools.replace(string, flag, value);
 			}
