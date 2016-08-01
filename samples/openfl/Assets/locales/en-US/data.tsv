@@ -7,4 +7,4 @@ $MISSING_FILES	<X> localization files are missing:
 $ANOTHER_STRING	Another string
 $MORE_STRINGS	More strings
 $LOOK_MORE_STRINGS	Look, even more strings!
-$VARS	Give me <X> {Beer, Beers}, <X> more Beers, <Y> {1:Whiskey, 2-5:Whiskeys, 8:Ciders, 9-12:MORE} and <Z> things
+$VARS	Give me <X> {Beer, Beers}, <X> more Beers, <Y> {2:Whiskeys, 1:Whiskey, n:Default, 3-12:Barrels} and <Z> things

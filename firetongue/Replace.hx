@@ -75,9 +75,10 @@ class Replace
 					var arr = ~/\s?,\s?/g.split(content);//Split the string into an array, using regex to account for spaces
 					var plural:String = "";
 					//Are numbers provided?
-					if (~/[0-9]+/.match(arr[0])){
+					if (~/[0-9n]+/.match(arr[0])){
 						for (v in arr){
 							var n:String = v.substring(0, v.indexOf(":"));//The numeric expression (ex. 1 or 2-5)
+							if (plural == "" && n == "n") plural = v.substring(2);//Set n-plural by default
 							//Is range?
 							if (n.indexOf("-") != -1){
 								var b:Int = Std.parseInt(n.substring(0, n.indexOf("-")));
@@ -92,7 +93,7 @@ class Replace
 									plural = v.substring(2);
 								}
 							}
-							//If no match was found, use the smallest/largest value //TODO: Closest value!
+							//If no match was found, use the smallest/largest value
 							if (plural == ""){
 								if (Std.parseInt(value) < Std.parseInt(arr[0])){
 									var r:String = arr[0];
